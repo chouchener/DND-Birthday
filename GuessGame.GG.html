@@ -1,0 +1,261 @@
+<html lang="en" class=" -webkit-"><head>
+<meta charset="UTF-8">
+<title>Your Birthday Pre-Game</title>
+<meta name="viewport" content="width=device-width"><link rel="author" href="https://google.com/+natewiley">
+<link rel="stylesheet" type="text/css" href="storylineCss.css">
+<link rel="icon" href="images/title.jpg">
+<style type="text/css">
+ body{
+  width: 100%;
+  background-image: url(images/arriere4.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+
+</head>
+<body translate="no">
+<div class="hangman">
+<div class="guess"><ul class="word"><li data-pos="0" class="letter">*</li><li data-pos="1" class="letter">*</li><li data-pos="2" class="letter">*</li><li data-pos="3" class="letter">*</li><li data-pos="4" class="letter">*</li><li data-pos="5" class="letter">*</li></ul></div>
+<form class="guessForm">
+<input type="text" class="guessLetter" maxlength="1" placeholder="Enter a letter . . . ⏎"> <button type="submit" class="guessButton">Guess</button>
+</form>
+<p style="color: white; font-size: 25px; ">Hint: The word is related to the story from the main page. <br>It is the boy's trait  of character that activated the psychometry power of the earthian girl <br>Check the slides</p>
+<div class="wrong"></div>
+<div class="message">
+<h1 class="title"></h1>
+<p class="text"></p>
+</div>
+</div>
+<div class="tooltip">About
+  <span class="tooltiptext">The psychometric Earthian is a linear game about a girl gifted with a twisted supernatural power of reading through people's skins. It is called psychometry. <br>However, this gift turns out to be her current curse as she kept on discovering horrifying truths about her beloved relatives and companions. To undo the curse, the Earthian needs to find hints at several stages that allow her to unfold the story, the origin, and the lore of her psychometry power. <br>Soon, she would find out that a celestial boy was behind the enigma. Also, the hints were rather a map of the astral skies leading her to the celestial boy that holds the answers of her unspoken spirits. <br>Hence, would he give in the key to free her from her oath unconditionally? </span>
+</div>
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-db44b196776521ea816683afab021f757616c80860d31da6232dedb8d7cc4862.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script id="rendered-js">
+
+(function ($, window, undefined) {
+
+  Hangman = {
+    init: function (words) {
+      this.words = words,
+      this.hm = $(".hangman"),
+      this.msg = $(".message"),
+      this.msgTitle = $(".title"),
+      this.msgText = $(".text"), 
+      this.wrd = this.randomWord(),
+      this.correct = 0,
+      this.guess = $(".guess"),
+      this.wrong = $(".wrong"),
+      this.wrongGuesses = [],
+      this.rightGuesses = [],
+      this.guessForm = $(".guessForm"),
+      this.guessLetterInput = $(".guessLetter"),
+      this.goodSound = new Audio("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/goodbell.mp3"),
+      this.badSound = new Audio("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/bad.mp3"),
+      this.winSound = new Audio("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74196/win.mp3"),
+      this.setup();
+    },
+
+
+    setup: function () {
+      this.binding();
+      this.sounds();
+      this.showGuess(this.wrongGuesses);
+      this.showWrong();
+
+    },
+
+
+    sounds: function () {
+      this.badSound.volume = .4;
+      this.goodSound.volume = .4;
+      this.winSound.volume = .8;
+
+    },
+
+
+    binding: function () {
+      this.guessForm.on("submit", $.proxy(this.theGuess, this));
+    },
+
+
+    playSound: function (sound) {
+      this.stopSound(sound);
+      this[sound].play();
+    },
+
+
+    stopSound: function (sound) {
+      this[sound].pause();
+      this[sound].currentTime = 0;
+
+    },
+
+    theGuess: function (e) {
+      e.preventDefault();
+      var guess = this.guessLetterInput.val();
+      if (guess.match(/[a-zA-Z]/) && guess.length == 1) {
+        if ($.inArray(guess, this.wrongGuesses) > -1 || $.inArray(guess, this.rightGuesses) > -1) {
+          this.playSound("badSound");
+          this.guessLetterInput.val("").focus();
+        } else
+        if (guess) {
+          var foundLetters = this.checkGuess(guess);
+          if (foundLetters.length > 0) {
+            this.setLetters(foundLetters);
+            this.playSound("goodSound");
+            this.guessLetterInput.val("").focus();
+          } else {
+            this.wrongGuesses.push(guess);
+            if (this.wrongGuesses.length == 28) {
+              this.lose();
+            } else {
+              this.showWrong(this.wrongGuesses);
+              this.playSound("badSound");
+            }
+            this.guessLetterInput.val("").focus();
+          }
+        }
+      } else {
+        this.guessLetterInput.val("").focus();
+      }
+    },
+
+    randomWord: function () {
+      return this._wordData(this.words[Math.floor(Math.random() * this.words.length)]);
+    },
+
+    showGuess: function () {
+      var frag = "<ul class='word'>";
+      $.each(this.wrd.letters, function (key, val) {
+        frag += "<li data-pos='" + key + "' class='letter'>*</li>";
+      });
+      frag += "</ul>";
+      this.guess.html(frag);
+    },
+
+
+    showWrong: function (wrongGuesses) {
+      if (wrongGuesses) {
+        var frag = "<ul class='wrongLetters'>";
+        frag += "<p>Wrong Letters: </p>";
+        $.each(wrongGuesses, function (key, val) {
+          frag += "<li>" + val + "</li>";
+        });
+        frag += "</ul>";
+      } else
+      {
+        frag = "";
+      }
+
+      this.wrong.html(frag);
+    },
+
+
+    checkGuess: function (guessedLetter) {
+      var _ = this;
+      var found = [];
+      $.each(this.wrd.letters, function (key, val) {
+        if (guessedLetter == val.letter.toLowerCase()) {
+          found.push(val);
+          _.rightGuesses.push(val.letter);
+        }
+      });
+      return found;
+
+    },
+
+
+    setLetters: function (letters) {
+      var _ = this;
+      _.correct = _.correct += letters.length;
+      $.each(letters, function (key, val) {
+        var letter = $("li[data-pos=" + val.pos + "]");
+        letter.html(val.letter);
+        letter.addClass("correct");
+
+        if (_.correct == _.wrd.letters.length) {
+          _.win();
+        }
+      });
+    },
+
+
+    _wordData: function (word) {
+
+      return {
+        letters: this._letters(word),
+        word: word.toLowerCase(),
+        totalLetters: word.length };
+
+    },
+
+
+    hideMsg: function () {
+      this.msg.hide();
+      this.msgTitle.hide();
+      this.restart.hide();
+      this.msgText.hide();
+    },
+
+
+    showMsg: function () {
+      var _ = this;
+      _.msg.show("blind", function () {
+        _.msgTitle.show("bounce", "slow", function () {
+          _.msgText.show("slide", function () {
+            _.restart.show("fade");
+          });
+
+        });
+
+      });
+    },
+
+
+    _letters: function (word) {
+      var letters = [];
+      for (var i = 0; i < word.length; i++) {if (window.CP.shouldStopExecution(0)) break;
+        letters.push({
+          letter: word[i],
+          pos: i });
+
+      }window.CP.exitedLoop(0);
+      return letters;
+    },
+
+
+    rating: function () {
+      var right = this.rightGuesses.length,
+      wrong = this.wrongGuesses.length || 0,
+      rating = {
+        rating: Math.floor(right / (wrong + right) * 100),
+        guesses: right + wrong };
+
+
+      return rating;
+    },
+
+    win: function () {
+      var rating = this.rating();
+      this.msgTitle.html("Happy Birthday Nejm, le petit cher Malin! ^_^");
+      // this is messy
+      this.msgText.html("You can access the first round of the game, as you solved the word in <span class='highlight'>" + rating.guesses + "</span> Guesses!<br>Score: <span class='highlight'>" + rating.rating + "%</span>");
+      this.showMsg();
+      this.playSound("winSound");
+
+    } };
+
+
+  var wordList = ["genuineness"];
+
+  Hangman.init(wordList);
+
+})(jQuery, window);
+
+    </script>
+
+
+</body></html>

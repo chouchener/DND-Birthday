@@ -1,0 +1,354 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Birthday Story</title>
+<link rel="stylesheet" href="cssanimation.css"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="storylineCss.css">
+<link rel="icon" href="images/title.jpg">
+<script type="text/javascript" src="scrolly.js"></script>
+<style type="text/css"></style>
+</head>
+<body translate="no">
+
+  <div class="scroller">
+    <div class="container">
+    <a href="#slidecontainer" style="text-decoration: none;">scroll down<span class="thescroll"></span></a>
+    </div>
+  </div>
+    <img class="icone1" id="icon1" src="images/persona3.png">
+    <img class="icone2" src="images/cadre.png" onmouseover="colorful()" onmouseout="greyful()">
+ 
+<div class="intro">  
+  <p class="typewrite" data-period="6000" data-type="[ &quot;They say old tales carry weight for the wise and nothing for simpletons. This tale shares the truths of unspoken lifespans and the pledge of tomorrow's gleam. Once upon a time, where clocks tick faster and memories fade away quicker, there was a psychometric girl...&quot;]"><span class="wrap">Thank you for reading :) </span></p>
+</div>
+<audio src="audio2.mp3"></audio>
+<button id="buttonSound" class="sound">
+  <i class="fas fa-volume-mute"></i>
+</button>
+
+<div class="slideshow-container" id="slidecontainer">
+  <div class="scroller2" style="color: white;">
+    <div class="container" style="color: white;">
+    <a href="#myvideo" style="text-decoration: none; color: white;">scroll down<span class="thescroll" style="border: 1px solid white!important; color: white!important; "></span></a>
+    </div>
+  </div>
+<div class="mySlides fade">
+  <div class="numbertext">0 / 9</div>
+  <img src="images/scene01.jpg" style="width:100%; height: 550px;">
+  <div class="text">Please flip over pages</div>
+</div>
+
+
+<div class="mySlides fade">
+  <div class="numbertext">1 / 10</div>
+  <img src="images/scene02.jpg" style="width:100%;  height: 550px; ">
+  
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 9</div>
+  <img src="images/scene03.jpg" style="width:100%; height: 550px;">
+  
+</div>
+<div class="mySlides fade">
+  <div class="numbertext">3 / 9</div>
+  <img src="images/scene04.jpg" style="width:100%; height: 550px;">
+</div>
+<div class="mySlides fade">
+  <div class="numbertext">4 / 9</div>
+  <img src="images/scene05.jpg" style="width:100%; height: 550px;"> 
+</div>
+<div class="mySlides fade">
+  <div class="numbertext">5 / 9</div>
+  <img src="images/scene06.jpg" style="width:100%; height: 550px;">  
+</div>
+<div class="mySlides fade">
+  <div class="numbertext">6 / 9</div>
+  <img src="images/scene07.jpg" style="width:100%; height: 550px;"> 
+</div>
+<div class="mySlides fade">
+  <div class="numbertext">7 / 9</div>
+  <img src="images/scene08.jpg" style="width:100%; height: 550px;"> 
+</div>
+<div class="mySlides fade">
+  <div class="numbertext">8 / 9</div>
+  <img src="images/scene09.jpg" style="width:100%; height: 550px;"> 
+</div>
+
+
+<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+<a class="next" onclick="plusSlides(1)">&#10095;</a>
+<br>
+
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span> 
+  <span class="dot" onclick="currentSlide(2)"></span> 
+  <span class="dot" onclick="currentSlide(3)"></span> 
+  <span class="dot" onclick="currentSlide(4)"></span>
+  <span class="dot" onclick="currentSlide(5)"></span>
+  <span class="dot" onclick="currentSlide(6)"></span>
+  <span class="dot" onclick="currentSlide(7)"></span>
+  <span class="dot" onclick="currentSlide(8)"></span>
+  <span class="dot" onclick="currentSlide(9)"></span>
+  
+</div>
+</div>
+
+
+<div class="myvideo" id="myvideo">
+  <video width="100%" height="450px" controls style="position: absolute; top: 50px;">
+   <source src="images/granny.mp4" type="video/mp4">
+  </video>
+  <a href="GuessGame.GG.html"><h3 style="color: white; font-size: 25px;font-family:myFirstFont; display: flex; text-align: center; line-height: 100%; ">Are you triggered to discover the truth & undo the curse? Click here and make this conquest yours as well, a journey of an outcasted soul turning into a brave warrior!</h3></a>
+</div>
+
+<footer onmouseover="footerhover()" onmouseout="footerunhover()">
+  <img class="footerimg" id="footerimage" src="images/the end.gif">
+  <p style="color: #ff44ff!important; z-index: 1; position: absolute; bottom: 5%; left: 5%;">By Rim Chouchene | 04.02.2020</p>
+</footer>
+
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js"></script>
+<script id="rendered-js">
+      var scene = new THREE.Scene();
+document.addEventListener('mousemove', onMouseMove, false);
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+var mouseX;
+var mouseY;
+
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+window.addEventListener("resize", function () {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+var distance = Math.min(200, window.innerWidth / 4);
+var geometry = new THREE.Geometry();
+
+for (var i = 0; i < 1600; i++) {
+
+  var vertex = new THREE.Vector3();
+
+  var theta = THREE.Math.randFloatSpread(360);
+  var phi = THREE.Math.randFloatSpread(360);
+
+  vertex.x = distance * Math.sin(theta) * Math.cos(phi);
+  vertex.y = distance * Math.sin(theta) * Math.sin(phi);
+  vertex.z = distance * Math.cos(theta);
+
+  geometry.vertices.push(vertex);
+}
+var particles = new THREE.Points(geometry, new THREE.PointsMaterial({ color: 0xff44ff, size: 1 }));
+particles.boundingSphere = 50;
+
+
+var renderingParent = new THREE.Group();
+renderingParent.add(particles);
+
+var resizeContainer = new THREE.Group();
+resizeContainer.add(renderingParent);
+scene.add(resizeContainer);
+
+camera.position.z = 100;
+
+var animate = function () {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+};
+var myTween;
+function onMouseMove(event) {
+  if (myTween)
+  myTween.kill();
+
+  mouseX = event.clientX / window.innerWidth * 2 - 1;
+  mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+  myTween = gsap.to(particles.rotation, { duration: 0.1, x: mouseY * -1, y: mouseX });
+  //particles.rotation.x = mouseY*-1;
+  //particles.rotation.y = mouseX;
+}
+animate();
+
+// Scaling animation
+var animProps = { scale: 1, xRot: 0, yRot: 0 };
+gsap.to(animProps, { duration: 10, scale: 1.3, repeat: -1, yoyo: true, ease: "sine", onUpdate: function () {
+    renderingParent.scale.set(animProps.scale, animProps.scale, animProps.scale);
+  } });
+
+gsap.to(animProps, { duration: 120, xRot: Math.PI * 2, yRot: Math.PI * 4, repeat: -1, yoyo: true, ease: "none", onUpdate: function () {
+    renderingParent.rotation.set(animProps.xRot, animProps.yRot, 0);
+  } });
+      //# sourceURL=pen.js
+    </script>
+
+<script>
+       window.onload = function() {
+          scrolly();
+       }; 
+    </script>
+    <script> 
+  scrolly ({ 
+    scrollyOffsetTop: 20
+  }); 
+</script> 
+<script>
+function colorful() {
+
+  document.getElementById("icon1").style.filter="grayscale(1%)";
+
+}
+
+function greyful(x) {
+ document.getElementById("icon1").style.filter="grayscale(100%)";
+
+}
+</script>
+<script>
+const button = document.querySelector("#buttonSound");
+const icon = document.querySelector("#buttonSound > i");
+const audio = document.querySelector("audio");
+
+button.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.volume = 0.2;
+    audio.loop=true;
+    audio.play();
+    icon.classList.remove('fa-volume-mute');
+    icon.classList.add('fa-volume-up');
+    
+  } else {
+    audio.pause();
+    icon.classList.remove('fa-volume-up');
+    icon.classList.add('fa-volume-mute');
+  }
+  button.classList.add("fade");
+});
+</script>
+<script type="text/javascript">
+  function footerhover() {
+
+  document.getElementById("footerimage").style.opacity="1";
+  document.getElementById("footerimage").style.filter="grayscale(0%)"
+}
+function footerunhover() {
+
+  document.getElementById("footerimage").style.opacity="0.8";
+  document.getElementById("footerimage").style.filter="grayscale(10%)"
+}
+</script>
+
+
+
+<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script id="">
+          var TxtType = function (el, toRotate, period) {
+  this.toRotate = toRotate;
+  this.el = el;
+  this.loopNum = 0;
+  this.period = parseInt(period, 2) || 2000;
+  this.txt = '';
+  this.tick();
+  this.isDeleting = false;
+};
+
+TxtType.prototype.tick = function () {
+  var i = this.loopNum % this.toRotate.length;
+  var fullTxt = this.toRotate[i];
+
+  if (this.isDeleting) {
+    this.txt = fullTxt.substring(0, this.txt.length - 1);
+  } else {
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+  }
+
+  this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+  var that = this;
+  var delta = 100 - Math.random() * 100;
+
+  if (this.isDeleting) {delta /= 2;}
+
+  if (!this.isDeleting && this.txt === fullTxt) {
+    delta = this.period;
+    this.isDeleting = true;
+  } else if (this.isDeleting && this.txt === '') {
+    this.isDeleting = false;
+    this.loopNum++;
+    delta = 50;
+  }
+
+  setTimeout(function () {
+    that.tick();
+  }, delta);
+};
+
+window.onload = function () {
+  var elements = document.getElementsByClassName('typewrite');
+  for (var i = 0; i < elements.length; i++) {if (window.CP.shouldStopExecution(0)) break;
+    var toRotate = elements[i].getAttribute('data-type');
+    var period = elements[i].getAttribute('data-period');
+    if (toRotate) {
+      new TxtType(elements[i], JSON.parse(toRotate), period);
+    }
+  }
+  // INJECT CSS
+  window.CP.exitedLoop(0);var css = document.createElement("style");
+  css.type = "text/css";
+  css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+  document.body.appendChild(css);
+};
+          //# sourceURL=pen.js
+        </script>
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+</script>
+
+<script>
+var elem = document.getElementById("myvideo");
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+}
+</script>
+
+    <canvas style="width: 682px; height: 800px;"></canvas>
+
+
+</body></html>
